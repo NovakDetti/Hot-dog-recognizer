@@ -26,12 +26,27 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let userPickedimage = info[.originalImage] as? UIImage {
             recognizerImageView.image = userPickedimage
+            let ciiImage = CIImage(image: userPickedimage)
         }
         
         imagePicker.dismiss(animated: true, completion: nil)
         
     }
-    
+
+    func detect(image : CIImage){
+        guard let model = try? VNCoreMLModel(for: SqueezeNet().model) else{ fatalError()}
+        
+        let request = VNCoreMLRequest(model: model) { (request, error) in
+            guard let results = request.results as? [VNClassificationObservation] else {fatalError()}
+        }
+        
+        let handler = VNImageRequestHandler(ciImage: image)
+        do{
+            try handler.perform([request])
+        }catch{
+            print(error)
+        }
+    }
    
 
 
