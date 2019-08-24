@@ -12,6 +12,8 @@ import Vision
 
 class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    @IBOutlet weak var upArrow: UIImageView!
+    @IBOutlet weak var infoText: UILabel!
     @IBOutlet weak var recognizerImageView: UIImageView!
     
     let imagePicker = UIImagePickerController()
@@ -35,6 +37,8 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
     }
 
     func detect(image: CIImage) {
+        upArrow.isHidden = true
+        infoText.isHidden = true
             guard let model = try? VNCoreMLModel(for: Resnet50().model) else {
             fatalError("can't load ML model")
         }
