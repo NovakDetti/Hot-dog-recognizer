@@ -13,8 +13,11 @@ import Vision
 class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var upArrow: UIImageView!
-    @IBOutlet weak var infoText: UILabel!
     @IBOutlet weak var recognizerImageView: UIImageView!
+    @IBOutlet weak var hotdogBun: UIImageView!
+    @IBOutlet weak var ingredients: UIImageView!
+    @IBOutlet weak var cucumber: UIImageView!
+    @IBOutlet weak var text: UILabel!
     
     let imagePicker = UIImagePickerController()
     
@@ -23,6 +26,7 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
         imagePicker.delegate = self
         imagePicker.sourceType = .camera
         imagePicker.allowsEditing = false
+   
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -38,7 +42,10 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
 
     func detect(image: CIImage) {
         upArrow.isHidden = true
-        infoText.isHidden = true
+        hotdogBun.isHidden = true
+        cucumber.isHidden = true
+        ingredients.isHidden = true
+        text.isHidden = true
             guard let model = try? VNCoreMLModel(for: Resnet50().model) else {
             fatalError("can't load ML model")
         }
@@ -53,7 +60,7 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
             if topResult.identifier.contains("hotdog") {
                 DispatchQueue.main.async {
                     self.navigationItem.title = "Hotdog!"
-                    self.navigationController?.navigationBar.barTintColor = UIColor.green
+                    self.navigationController?.navigationBar.barTintColor = UIColor(red: 51.0/255.0, green: 142.0/255.0, blue: 96.0/255.0, alpha: 1.0)
                     self.navigationController?.navigationBar.isTranslucent = false
                     
                     
@@ -62,7 +69,7 @@ class ViewController: UIViewController,  UIImagePickerControllerDelegate, UINavi
             else {
                 DispatchQueue.main.async {
                     self.navigationItem.title = "Not Hotdog!"
-                    self.navigationController?.navigationBar.barTintColor = UIColor.red
+                    self.navigationController?.navigationBar.barTintColor = UIColor(red: 172.0/255.0, green: 34.0/255.0, blue: 48.0/255.0, alpha: 1.0)
                     self.navigationController?.navigationBar.isTranslucent = false
                     
                 }
