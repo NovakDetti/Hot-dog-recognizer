@@ -1,5 +1,8 @@
 # Hot-dog-recognizer
-## Learning Swift
+
+It can be familiar from a series, that is Silicon valley.
+An app to recognize if the main object on the picture is a hotdog or not :)
+
 
 ![landing](https://user-images.githubusercontent.com/54432325/63640121-f0e13680-c69c-11e9-8366-7c4e974ebfee.png)
 ![notHotdog](https://user-images.githubusercontent.com/54432325/63640124-f8a0db00-c69c-11e9-8044-58ee7448ab9a.png)
